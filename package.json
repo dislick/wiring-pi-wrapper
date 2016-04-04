@@ -2,7 +2,7 @@
   "name": "wiring-pi-wrapper",
   "version": "1.0.0",
   "description": "",
-  "main": "wiring-pi-wrapper.js",
+  "main": "src/wiring-pi-wrapper.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

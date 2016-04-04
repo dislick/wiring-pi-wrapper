@@ -4,15 +4,23 @@ This small node module written in TypeScript provides a wrapper around [wiring-p
 
 ## Usage
 
-```
-var wpw = require('wiring-pi-wrapper');
+```javascript
+var wpw = require('./wiring-pi-wrapper').WiringPiWrapper;
+var pinModes = require('./wiring-pi-wrapper').PinModes;
+
+// setup the pin layout
 wpw.setup('wpi');
 
-var pin = wpw.setupPin(17, wpw.modes.OUTPUT);
+// write example
+var pin = wpw.setupPin(3, pinModes.output);
 pin.write(true);
-var status = pin.read();
 
-var pin = wpw.setupPin(17, wpw.modes.INPUT);
+// read example
+var pin = wpw.setupPin(2, pinModes.input);
+var status = pin.read(); // returns a boolean
+
+// event listener example
+var pin = wpw.setupPin(2, pinModes.input);
 pin.addEventListener('change', (status) => {
   console.log(status);
 });
@@ -21,17 +29,20 @@ pin.addEventListener('change', (status) => {
 ## API
 
 ### wpw
+
 #### `wpw.setup(mode: string)`
+
 Maps directly to the `wiring-pi``setup()` function. Mode must be one of the following values:
 
-* `wpi`: sets up pin numbering with `wiringPiSetup()`
-* `gpio`: sets up pin numbering with `wiringPiSetupGpio()`
-* `sys`: sets up pin numbering with `wiringPiSetupSys()`
-* `phys`: sets up pin numbering with `wiringPiSetupPhys()`
+- `wpi`: sets up pin numbering with `wiringPiSetup()`
+- `gpio`: sets up pin numbering with `wiringPiSetupGpio()`
+- `sys`: sets up pin numbering with `wiringPiSetupSys()`
+- `phys`: sets up pin numbering with `wiringPiSetupPhys()`
 
 More information [can be found here](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#setupmode).
 
 #### `wpw.setupPin(pin: number, mode: wpw.mode)`
+
 Creates a new `Pin` object and executes the [`pinMode()`](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#pinmodepin-mode) function.
 
 ### Pin
@@ -52,7 +63,7 @@ Synchronously writes a status to the pin. Maps to [`digitalWrite()`](https://git
 
 Binds one of the following events to the pin:
 
-* `change`: Fires when the status of the pin changes. The `handler` function receives the status as a paramter.
+- `change`: Fires when the status of the pin changes. The `handler` function receives the status as a paramter.
 
 #### `pin.removeEventListener(event: string, handler?: function)`
 

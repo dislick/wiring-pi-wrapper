@@ -42,10 +42,14 @@ Synchronously returns the status of the pin as a boolean.
 
 #### `pin.write(status: boolean)`
 
-Synchronously writes a status to the pin.
+Synchronously writes a status to the pin. Maps to the
 
-#### `pin.on(event: string, handler: function)`
+#### `pin.addEventListener(event: string, handler: function)`
 
 Binds one of the following events to the pin.
 
 * `change`: Fires when the status of the pin changes. The `handler` function receives the status as a paramter.
+
+#### `pin.removeEventListener(event: string, handler?: function)`
+
+Unbinds an event listener. If no `handler` function gets passed it removes all registered event listeners of that event.

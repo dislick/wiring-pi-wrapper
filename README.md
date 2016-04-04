@@ -1,8 +1,10 @@
 # wiring-pi-wrapper
 
-This small node module written in TypeScript provides a wrapper around [wiring-pi](https://github.com/eugeneware/wiring-pi).
+TypeScript wrapper around [wiring-pi](https://github.com/eugeneware/wiring-pi).
 
 ## Usage
+
+`npm install wiring-pi-wrapper --save`
 
 ```javascript
 var wpw = require('./wiring-pi-wrapper').WiringPiWrapper;

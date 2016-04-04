@@ -10,11 +10,13 @@
   },
   "buildOnSave": true,
   "filesGlob": [
-    "**/*.ts"
+    "**/*.ts",
+    "!examples/*.ts"
   ],
   "files": [
     "src/typings/node/node.d.ts",
     "src/typings/tsd.d.ts",
+    "src/wiring-pi-wrapper.d.ts",
     "src/wiring-pi-wrapper.ts"
   ],
   "atom": {

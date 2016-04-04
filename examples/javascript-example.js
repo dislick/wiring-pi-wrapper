@@ -1,5 +1,5 @@
-var wpw = require('./wiring-pi-wrapper').WiringPiWrapper;
-var pinModes = require('./wiring-pi-wrapper').PinModes;
+var wpw = require('wiring-pi-wrapper').WiringPiWrapper;
+var pinModes = require('wiring-pi-wrapper').PinModes;
 
 // setup the pin layout
 wpw.setup('wpi');

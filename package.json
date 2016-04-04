@@ -1,6 +1,6 @@
 {
   "name": "wiring-pi-wrapper",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "",
   "main": "src/wiring-pi-wrapper.js",
   "scripts": {

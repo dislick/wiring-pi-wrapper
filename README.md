@@ -36,6 +36,10 @@ Creates a new `Pin` object and executes the [`pinMode()`](https://github.com/eug
 
 ### Pin
 
+#### `constructor`
+
+The `Pin` class cannot be instantiated using the `new` keyword. Use `wpw.setupPin()`.
+
 #### `pin.read()`
 
 Synchronously returns the status of the pin as a boolean. Maps to [`digitalRead()`](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#digitalreadpin).

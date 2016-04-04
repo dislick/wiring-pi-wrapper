@@ -13,7 +13,7 @@ pin.write(true);
 var status = pin.read();
 
 var pin = wpw.setupPin(17, wpw.modes.INPUT);
-pin.on('change', (status) => {
+pin.addEventListener('change', (status) => {
   console.log(status);
 });
 ```

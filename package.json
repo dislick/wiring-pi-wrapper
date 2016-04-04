@@ -1,0 +1,22 @@
+{
+  "name": "wiring-pi-wrapper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "wiring-pi-wrapper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dislick/wiring-pi-wrapper.git"
+  },
+  "author": "Muff AG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dislick/wiring-pi-wrapper/issues"
+  },
+  "homepage": "https://github.com/dislick/wiring-pi-wrapper#readme",
+  "dependencies": {
+    "typescript": "^1.8.9"
+  }
+}

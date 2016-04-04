@@ -1,6 +1,6 @@
 # wiring-pi-wrapper
 
-This small node module provides a wrapper around [wiring-pi](https://github.com/eugeneware/wiring-pi).
+This small node module written in TypeScript provides a wrapper around [wiring-pi](https://github.com/eugeneware/wiring-pi).
 
 ## Usage
 
@@ -38,15 +38,15 @@ Creates a new `Pin` object and executes the [`pinMode()`](https://github.com/eug
 
 #### `pin.read()`
 
-Synchronously returns the status of the pin as a boolean. 
+Synchronously returns the status of the pin as a boolean. Maps to [`digitalRead()`](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#digitalreadpin).
 
 #### `pin.write(status: boolean)`
 
-Synchronously writes a status to the pin. Maps to the
+Synchronously writes a status to the pin. Maps to [`digitalWrite()`](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#digitalwritepin-state).
 
 #### `pin.addEventListener(event: string, handler: function)`
 
-Binds one of the following events to the pin.
+Binds one of the following events to the pin:
 
 * `change`: Fires when the status of the pin changes. The `handler` function receives the status as a paramter.
 

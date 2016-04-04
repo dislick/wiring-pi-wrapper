@@ -47,6 +47,7 @@ var Pin = (function () {
     };
     return Pin;
 }());
+exports.Pin = Pin;
 (function (PinModes) {
     PinModes[PinModes["input"] = 0] = "input";
     PinModes[PinModes["output"] = 1] = "output";

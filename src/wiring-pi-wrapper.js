@@ -25,7 +25,7 @@ var Pin = (function () {
     };
     Pin.prototype.removeEventListener = function (event, handler) {
         this.eventListeners = this.eventListeners.filter(function (listener) {
-            return listener.event === event && listener.handler === listener;
+            return listener.event === event && (!handler || listener.handler === handler);
         });
     };
     Pin.prototype.bindChangeListener = function (handler) {

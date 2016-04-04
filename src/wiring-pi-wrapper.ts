@@ -52,7 +52,7 @@ export class Pin {
    */
   removeEventListener(event: string, handler?: any): void {
     this.eventListeners = this.eventListeners.filter((listener) => {
-      return listener.event === event && listener.handler === listener;
+      return listener.event === event && (!handler || listener.handler === handler);
     });
   }
 

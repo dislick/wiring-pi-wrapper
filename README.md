@@ -43,7 +43,7 @@ Maps directly to the `wiring-pi``setup()` function. Mode must be one of the foll
 
 More information [can be found here](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#setupmode).
 
-#### `wpw.setupPin(pin: number, mode: wpw.mode)`
+#### `wpw.setupPin(pin: number, mode: wpw.PinModes)`
 
 Creates a new `Pin` object and executes the [`pinMode()`](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#pinmodepin-mode) function.
 

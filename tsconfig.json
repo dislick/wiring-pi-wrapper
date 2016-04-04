@@ -13,6 +13,11 @@
     "**/*.ts"
   ],
   "files": [
-    "wiring-pi-wrapper.ts"
-  ]
+    "src/typings/node/node.d.ts",
+    "src/typings/tsd.d.ts",
+    "src/wiring-pi-wrapper.ts"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  }
 }

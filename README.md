@@ -37,7 +37,7 @@ pin.addEventListener('change', (status) => {
 
 #### `wpw.setup(mode: wpw.PinLayout)`
 
-Maps directly to the `wiring-pi``setup()` function. Mode must be one of the following values:
+Maps directly to the `wiring-pi` `setup()` function. Mode must be one of the following values:
 
 - `PinLayout.wpi`: sets up pin numbering with [`wiringPiSetup()`](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#wiringpisetup)
 - `PinLayout.gpio`: sets up pin numbering with [`wiringPiSetupGpio()`](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#wiringpisetupgpio)

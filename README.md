@@ -7,12 +7,13 @@ Node.js wrapper around [wiring-pi](https://github.com/eugeneware/wiring-pi) writ
 `npm install wiring-pi-wrapper --save`
 
 ```javascript
+var pinLayout = require('wiring-pi-wrapper').PinLayout;
 var wpw = require('wiring-pi-wrapper').WiringPiWrapper;
 var pinModes = require('wiring-pi-wrapper').PinModes;
 var ChangeWorker = require('wiring-pi-wrapper').ChangeWorker;
 
 // setup the pin layout
-wpw.setup('wpi');
+wpw.setup(pinLayout.wpi);
 
 // write example
 var pin = wpw.setupPin(3, pinModes.output);
@@ -34,20 +35,24 @@ pin.addEventListener('change', (status) => {
 
 ### wpw
 
-#### `wpw.setup(mode: string)`
+#### `wpw.setup(mode: wpw.PinLayout)`
 
 Maps directly to the `wiring-pi``setup()` function. Mode must be one of the following values:
 
-- `wpi`: sets up pin numbering with `wiringPiSetup()`
-- `gpio`: sets up pin numbering with `wiringPiSetupGpio()`
-- `sys`: sets up pin numbering with `wiringPiSetupSys()`
-- `phys`: sets up pin numbering with `wiringPiSetupPhys()`
+- `PinLayout.wpi`: sets up pin numbering with `wiringPiSetup()`
+- `PinLayout.gpio`: sets up pin numbering with `wiringPiSetupGpio()`
+- `PinLayout.sys`: sets up pin numbering with `wiringPiSetupSys()`
+- `PinLayout.phys`: sets up pin numbering with `wiringPiSetupPhys()`
 
 More information [can be found here](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#setupmode).
 
 #### `wpw.setupPin(pin: number, mode: wpw.PinModes)`
 
 Creates a new `Pin` object and executes the [`pinMode()`](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#pinmodepin-mode) function.
+Mode must be one of the following values:
+
+- `PinModes.input`
+- `PinModes.output`
 
 ### Pin
 

@@ -1,4 +1,3 @@
-"use strict";
 var wpi = require('wiring-pi');
 var ChangeWorker = (function () {
     function ChangeWorker() {
@@ -57,7 +56,7 @@ var ChangeWorker = (function () {
     ChangeWorker.isWorking = false;
     ChangeWorker.interval = 5;
     return ChangeWorker;
-}());
+})();
 exports.ChangeWorker = ChangeWorker;
 var Pin = (function () {
     function Pin(pinNumber, mode) {
@@ -95,8 +94,15 @@ var Pin = (function () {
         }
     };
     return Pin;
-}());
+})();
 exports.Pin = Pin;
+(function (PinLayout) {
+    PinLayout[PinLayout["wpi"] = 0] = "wpi";
+    PinLayout[PinLayout["gpio"] = 1] = "gpio";
+    PinLayout[PinLayout["sys"] = 2] = "sys";
+    PinLayout[PinLayout["phys"] = 3] = "phys";
+})(exports.PinLayout || (exports.PinLayout = {}));
+var PinLayout = exports.PinLayout;
 (function (PinModes) {
     PinModes[PinModes["input"] = 0] = "input";
     PinModes[PinModes["output"] = 1] = "output";
@@ -106,17 +112,31 @@ var WiringPiWrapper = (function () {
     function WiringPiWrapper() {
     }
     WiringPiWrapper.setup = function (mode) {
-        wpi.setup(mode);
+        var pinLayout = WiringPiWrapper.pinLayoutMap[mode];
+        if (!pinLayout) {
+            throw new Error('PinLayout not supported!');
+        }
+        wpi.setup(pinLayout);
     };
     WiringPiWrapper.setupPin = function (pin, mode) {
-        wpi.pinMode(pin, WiringPiWrapper.pinModeMap[mode]);
+        var pinMode = WiringPiWrapper.pinModeMap[mode];
+        if (!pinMode) {
+            throw new Error('PinMode not supported!');
+        }
+        wpi.pinMode(pin, pinMode);
         return new Pin(pin, mode);
+    };
+    WiringPiWrapper.pinLayoutMap = {
+        0: 'wpi',
+        1: 'gpio',
+        2: 'sys',
+        3: 'phys'
     };
     WiringPiWrapper.pinModeMap = {
         0: wpi.INPUT,
         1: wpi.OUTPUT
     };
     return WiringPiWrapper;
-}());
+})();
 exports.WiringPiWrapper = WiringPiWrapper;
 //# sourceMappingURL=wiring-pi-wrapper.js.map

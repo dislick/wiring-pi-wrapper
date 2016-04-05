@@ -147,19 +147,37 @@ export class Pin {
   }
 }
 
+export enum PinLayout {
+  wpi,
+  gpio,
+  sys,
+  phys
+}
+
 export enum PinModes {
   input,
   output
 }
 
 export class WiringPiWrapper {
+  private static pinLayoutMap = {
+    0: 'wpi',
+    1: 'gpio',
+    2: 'sys',
+    3: 'phys'
+  };
+
   private static pinModeMap = {
     0: wpi.INPUT,
     1: wpi.OUTPUT
   };
 
-  static setup(mode: string): void {
-    wpi.setup(mode);
+  static setup(mode: PinLayout): void {
+    let pinLayout = WiringPiWrapper.pinLayoutMap[mode];
+    if (!pinLayout) {
+      throw new Error('PinLayout not supported!');
+    }
+    wpi.setup(pinLayout);
   }
 
   /**
@@ -169,8 +187,13 @@ export class WiringPiWrapper {
    * @return {Pin}
    */
   static setupPin(pin: number, mode: PinModes): Pin {
+    let pinMode = WiringPiWrapper.pinModeMap[mode];
+    if (!pinMode) {
+      throw new Error('PinMode not supported!');
+    }
+
     // set pinMode on the given pin
-    wpi.pinMode(pin, WiringPiWrapper.pinModeMap[mode]);
+    wpi.pinMode(pin, pinMode);
 
     // instantiate a new Pin object
     return new Pin(pin, mode);

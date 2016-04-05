@@ -50,13 +50,20 @@ export declare class Pin {
      */
     removeEventListener(event: string, handler?: any): void;
 }
+export declare enum PinLayout {
+    wpi = 0,
+    gpio = 1,
+    sys = 2,
+    phys = 3,
+}
 export declare enum PinModes {
     input = 0,
     output = 1,
 }
 export declare class WiringPiWrapper {
+    private static pinLayoutMap;
     private static pinModeMap;
-    static setup(mode: string): void;
+    static setup(mode: PinLayout): void;
     /**
      * Initializes a Pin object
      * @param  {number}   pin

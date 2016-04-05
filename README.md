@@ -70,3 +70,9 @@ Binds one of the following events to the pin:
 #### `pin.removeEventListener(event: string, handler?: function)`
 
 Unbinds an event listener. If no `handler` function gets passed it removes all registered event listeners of that event.
+
+### ChangeWorker
+
+#### `ChangeWorker.interval`
+
+Allows the user to change the dirty checking interval of the pins.

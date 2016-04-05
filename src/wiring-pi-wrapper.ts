@@ -2,6 +2,88 @@
 
 let wpi = require('wiring-pi');
 
+export class ChangeWorker {
+  private static eventListeners: { pin: Pin, handlers: any[], previousOutput?: boolean }[] = [];
+  private static isWorking = false;
+  static interval = 5; // declares the interval for the worker
+
+  /**
+   * Adds a handler to the loop
+   * @param  {Pin}      pin
+   * @param  {function} handler
+   */
+  static add(pin: Pin, handler: any): void {
+    let listeners = ChangeWorker.eventListeners.filter(eventListener => eventListener.pin === pin);
+
+    if (listeners.length <= 0) {
+      ChangeWorker.eventListeners.push({
+        pin,
+        handlers: [handler]
+      });
+    } else {
+      listeners[0].handlers.push(handler);
+    }
+
+    if (!ChangeWorker.isWorking) {
+      ChangeWorker.start();
+    }
+  }
+
+  /**
+   * Removes a handler from the loop
+   * @param  {Pin}      pin
+   * @param  {function} handler
+   */
+  static remove(pin: Pin, handler: any): void {
+    let listeners = ChangeWorker.eventListeners.filter(eventListener => eventListener.pin === pin);
+
+    if (listeners.length > 0) {
+      listeners[0].handlers = listeners[0].handlers.filter(h => h !== handler);
+
+      if (listeners[0].handlers.length === 0) {
+        ChangeWorker.eventListeners.splice(ChangeWorker.eventListeners.indexOf(listeners[0]), 1);
+      }
+    }
+
+    if (ChangeWorker.eventListeners.length === 0) {
+      ChangeWorker.stop();
+    }
+  }
+
+  private static work() {
+    let run = () => {
+      ChangeWorker.eventListeners.forEach((listener) => {
+        let output = listener.pin.read();
+
+        if (output !== listener.previousOutput) {
+          // reset the comparing variable
+          listener.previousOutput = null;
+
+          // notifying handlers
+          listener.handlers.forEach(handler => handler(output));
+        }
+
+        listener.previousOutput = output;
+      });
+
+      // call run asynchronously
+      if (ChangeWorker.isWorking) {
+        setTimeout(run, ChangeWorker.interval);
+      }
+    };
+    run();
+  }
+
+  private static start() {
+    ChangeWorker.isWorking = true;
+    ChangeWorker.work();
+  }
+
+  private static stop() {
+    ChangeWorker.isWorking = false;
+  }
+}
+
 /**
  * Handles all read/write operations on a given GPIO Pin
  */
@@ -37,7 +119,7 @@ export class Pin {
 
     switch (event) {
       case 'change':
-        this.bindChangeListener(handler);
+        ChangeWorker.add(this, handler);
         break;
       default:
         this.removeEventListener(event, handler);
@@ -54,40 +136,14 @@ export class Pin {
     this.eventListeners = this.eventListeners.filter((listener) => {
       return listener.event === event && (!handler || listener.handler === handler);
     });
-  }
 
-  /**
-   * Dirty checking the pin output and notifiying listeners
-   * @param  {function} handler
-   */
-  private bindChangeListener(handler: (status: boolean) => void): void {
-    // used to compare the output and detecting changes
-    let previousOutput;
-
-    // declare recursive check function
-    let check = () => {
-      // abort if the handler has been removed using pin.removeEventListener()
-      if (!this.eventListeners.some(listener => listener.handler === handler)) {
-        return;
-      }
-
-      let output = this.read();
-
-      if (output !== previousOutput) {
-        // reset the comparing variable
-        previousOutput = null;
-
-        // notifying handler
-        handler(output);
-      }
-
-      previousOutput = output;
-      // call check asynchronously
-      setTimeout(check, 0);
-    };
-
-    // initial check call
-    check();
+    switch (event) {
+      case 'change':
+        ChangeWorker.remove(this, handler);
+        break;
+      default:
+        break;
+    }
   }
 }
 

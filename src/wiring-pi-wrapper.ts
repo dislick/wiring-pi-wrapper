@@ -18,7 +18,8 @@ export class ChangeWorker {
     if (listeners.length <= 0) {
       ChangeWorker.eventListeners.push({
         pin,
-        handlers: [handler]
+        handlers: [handler],
+        previousOutput: pin.read()
       });
     } else {
       listeners[0].handlers.push(handler);
@@ -174,7 +175,7 @@ export class WiringPiWrapper {
 
   static setup(mode: PinLayout): void {
     let pinLayout = WiringPiWrapper.pinLayoutMap[mode];
-    if (!pinLayout) {
+    if (pinLayout === void 0) {
       throw new Error('PinLayout not supported!');
     }
     wpi.setup(pinLayout);
@@ -188,7 +189,7 @@ export class WiringPiWrapper {
    */
   static setupPin(pin: number, mode: PinModes): Pin {
     let pinMode = WiringPiWrapper.pinModeMap[mode];
-    if (!pinMode) {
+    if (pinMode === void 0) {
       throw new Error('PinMode not supported!');
     }
 

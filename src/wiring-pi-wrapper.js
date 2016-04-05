@@ -1,3 +1,4 @@
+"use strict";
 var wpi = require('wiring-pi');
 var ChangeWorker = (function () {
     function ChangeWorker() {
@@ -7,7 +8,8 @@ var ChangeWorker = (function () {
         if (listeners.length <= 0) {
             ChangeWorker.eventListeners.push({
                 pin: pin,
-                handlers: [handler]
+                handlers: [handler],
+                previousOutput: pin.read()
             });
         }
         else {
@@ -56,7 +58,7 @@ var ChangeWorker = (function () {
     ChangeWorker.isWorking = false;
     ChangeWorker.interval = 5;
     return ChangeWorker;
-})();
+}());
 exports.ChangeWorker = ChangeWorker;
 var Pin = (function () {
     function Pin(pinNumber, mode) {
@@ -94,7 +96,7 @@ var Pin = (function () {
         }
     };
     return Pin;
-})();
+}());
 exports.Pin = Pin;
 (function (PinLayout) {
     PinLayout[PinLayout["wpi"] = 0] = "wpi";
@@ -113,14 +115,14 @@ var WiringPiWrapper = (function () {
     }
     WiringPiWrapper.setup = function (mode) {
         var pinLayout = WiringPiWrapper.pinLayoutMap[mode];
-        if (!pinLayout) {
+        if (pinLayout === void 0) {
             throw new Error('PinLayout not supported!');
         }
         wpi.setup(pinLayout);
     };
     WiringPiWrapper.setupPin = function (pin, mode) {
         var pinMode = WiringPiWrapper.pinModeMap[mode];
-        if (!pinMode) {
+        if (pinMode === void 0) {
             throw new Error('PinMode not supported!');
         }
         wpi.pinMode(pin, pinMode);
@@ -137,6 +139,6 @@ var WiringPiWrapper = (function () {
         1: wpi.OUTPUT
     };
     return WiringPiWrapper;
-})();
+}());
 exports.WiringPiWrapper = WiringPiWrapper;
 //# sourceMappingURL=wiring-pi-wrapper.js.map

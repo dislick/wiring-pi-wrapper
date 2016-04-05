@@ -7,8 +7,8 @@ Node.js wrapper around [wiring-pi](https://github.com/eugeneware/wiring-pi) writ
 `npm install wiring-pi-wrapper --save`
 
 ```javascript
-var pinLayout = require('wiring-pi-wrapper').PinLayout;
 var wpw = require('wiring-pi-wrapper').WiringPiWrapper;
+var pinLayout = require('wiring-pi-wrapper').PinLayout;
 var pinModes = require('wiring-pi-wrapper').PinModes;
 var ChangeWorker = require('wiring-pi-wrapper').ChangeWorker;
 

@@ -1,4 +1,4 @@
-import { PinLayout, WiringPiWrapper, PinModes, ChangeWorker } from 'wiring-pi-wrapper';
+import { WiringPiWrapper, PinLayout, PinModes, ChangeWorker } from 'wiring-pi-wrapper';
 
 // setup the pin layout
 WiringPiWrapper.setup(PinLayout.wpi);

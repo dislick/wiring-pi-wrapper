@@ -1,5 +1,5 @@
-var pinLayout = require('wiring-pi-wrapper').PinLayout;
 var wpw = require('wiring-pi-wrapper').WiringPiWrapper;
+var pinLayout = require('wiring-pi-wrapper').PinLayout;
 var pinModes = require('wiring-pi-wrapper').PinModes;
 var ChangeWorker = require('wiring-pi-wrapper').ChangeWorker;
 

@@ -1,6 +1,6 @@
 # wiring-pi-wrapper
 
-TypeScript wrapper around [wiring-pi](https://github.com/eugeneware/wiring-pi).
+Node.js wrapper around [wiring-pi](https://github.com/eugeneware/wiring-pi) written in TypeScript.
 
 ## Usage
 

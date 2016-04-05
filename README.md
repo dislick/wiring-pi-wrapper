@@ -39,17 +39,16 @@ pin.addEventListener('change', (status) => {
 
 Maps directly to the `wiring-pi``setup()` function. Mode must be one of the following values:
 
-- `PinLayout.wpi`: sets up pin numbering with `wiringPiSetup()`
-- `PinLayout.gpio`: sets up pin numbering with `wiringPiSetupGpio()`
-- `PinLayout.sys`: sets up pin numbering with `wiringPiSetupSys()`
-- `PinLayout.phys`: sets up pin numbering with `wiringPiSetupPhys()`
+- `PinLayout.wpi`: sets up pin numbering with [`wiringPiSetup()`](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#wiringpisetup)
+- `PinLayout.gpio`: sets up pin numbering with [`wiringPiSetupGpio()`](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#wiringpisetupgpio)
+- `PinLayout.sys`: sets up pin numbering with [`wiringPiSetupSys()`](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#wiringpisetupphys)
+- `PinLayout.phys`: sets up pin numbering with [`wiringPiSetupPhys()`](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#wiringpisetupsys)
 
 More information [can be found here](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#setupmode).
 
 #### `wpw.setupPin(pin: number, mode: wpw.PinModes)`
 
-Creates a new `Pin` object and executes the [`pinMode()`](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#pinmodepin-mode) function.
-Mode must be one of the following values:
+Creates a new `Pin` object and executes the [`pinMode()`](https://github.com/eugeneware/wiring-pi/blob/master/DOCUMENTATION.md#pinmodepin-mode) function. Mode must be one of the following values:
 
 - `PinModes.input`
 - `PinModes.output`

@@ -71,7 +71,7 @@ Synchronously writes a status to the pin. Maps to [`digitalWrite()`](https://git
 
 Binds one of the following events to the pin:
 
-- `change`: Fires when the status of the pin changes. The `handler` function receives the status as a paramter.
+- `change`: Fires when the status of the pin changes. The `handler` function receives the status as a parameter.
 
 #### `pin.removeEventListener(event: string, handler?: function)`
 

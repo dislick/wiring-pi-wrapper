@@ -41,7 +41,8 @@ export class ChangeWorker {
     if (listeners.length > 0) {
       listeners[0].handlers = listeners[0].handlers.filter(h => h !== handler);
 
-      if (listeners[0].handlers.length === 0) {
+      // if there is no handler left or handler is undefined -> remove from eventListener
+      if (listeners[0].handlers.length === 0 || handler === void 0) {
         ChangeWorker.eventListeners.splice(ChangeWorker.eventListeners.indexOf(listeners[0]), 1);
       }
     }

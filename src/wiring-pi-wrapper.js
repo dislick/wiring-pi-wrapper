@@ -23,7 +23,7 @@ var ChangeWorker = (function () {
         var listeners = ChangeWorker.eventListeners.filter(function (eventListener) { return eventListener.pin === pin; });
         if (listeners.length > 0) {
             listeners[0].handlers = listeners[0].handlers.filter(function (h) { return h !== handler; });
-            if (listeners[0].handlers.length === 0) {
+            if (listeners[0].handlers.length === 0 || handler === void 0) {
                 ChangeWorker.eventListeners.splice(ChangeWorker.eventListeners.indexOf(listeners[0]), 1);
             }
         }

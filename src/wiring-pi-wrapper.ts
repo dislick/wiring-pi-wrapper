@@ -92,7 +92,12 @@ export class ChangeWorker {
 export class Pin {
   private eventListeners = [];
 
-  constructor(private pinNumber: number, private mode: PinModes) {
+  pinNumber: number;
+  mode: PinModes;
+
+  constructor(pinNumber: number, mode: PinModes) {
+    this.pinNumber = pinNumber;
+    this.mode = mode;
   }
 
   /**

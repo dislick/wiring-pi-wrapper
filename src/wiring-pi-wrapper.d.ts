@@ -23,8 +23,8 @@ export declare class ChangeWorker {
  * Handles all read/write operations on a given GPIO Pin
  */
 export declare class Pin {
-    private pinNumber;
-    private mode;
+    pinNumber: number;
+    mode: PinModes;
     private eventListeners;
     constructor(pinNumber: number, mode: PinModes);
     /**

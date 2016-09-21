@@ -1,3 +1,4 @@
+/// <reference path="typings/tsd.d.ts" />
 "use strict";
 var wpi = require('wiring-pi');
 var ChangeWorker = (function () {
@@ -62,9 +63,9 @@ var ChangeWorker = (function () {
 exports.ChangeWorker = ChangeWorker;
 var Pin = (function () {
     function Pin(pinNumber, mode) {
+        this.eventListeners = [];
         this.pinNumber = pinNumber;
         this.mode = mode;
-        this.eventListeners = [];
     }
     Pin.prototype.read = function () {
         return !!wpi.digitalRead(this.pinNumber);
@@ -141,4 +142,3 @@ var WiringPiWrapper = (function () {
     return WiringPiWrapper;
 }());
 exports.WiringPiWrapper = WiringPiWrapper;
-//# sourceMappingURL=wiring-pi-wrapper.js.map
